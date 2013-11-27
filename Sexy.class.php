@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Sexy or Not, main class.
+ */
 class Sexy{
 
     // The attachment object
