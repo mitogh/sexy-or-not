@@ -12,7 +12,7 @@ class Sexy{
     private $image_date = ''; 
 
     // url of the image
-    public $image_url = ''; 
+    private $image_url = ''; 
 
     // Height of the image
     private $image_height = ''; 
@@ -24,7 +24,7 @@ class Sexy{
     private $author_id = 0; 
 
     /**
-     * Get the data of the image
+     * Fill most of the variable of instance 
      * @var     $size   String  The size of the image
      */
     public function fill_data_from_object( $size = 'thumbnail'){

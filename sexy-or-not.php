@@ -24,15 +24,9 @@ function options(){
     if( !current_user_can('manage_options') ){
         wp_die(__('You do not have sufficient permission to access this page'));
     }
-
-    $sexy = new Sexy(); 
-    $sexy->random_image_from_library();
-    $sexy->fill_data_from_object('medium');
 ?>
     <div class="wrap">
         <div id="icon-options-general" class="icon32"><br /></div><h2>Sexy Options</h2>
-
-        <div><img src='<?php echo $sexy->image_url; ?>'></div>
 
         <form method="post" action="options.php">
             <table class="form-table">
