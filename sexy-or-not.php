@@ -8,3 +8,8 @@
  * Author URI: http://www.crisoforo.com
  * License: GPL2
  */
+
+
+include_once(plugin_dir_path(__FILE__).'/Sexy.class.php');
+# $sexy = new Sexy();
+# $sexy->get_random_image_from_library();
