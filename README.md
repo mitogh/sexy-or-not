@@ -1,17 +1,10 @@
-# Copyright 2013  Crisoforo Gaspar Hernández (email : mitogh@gmail.com)
-=======
+# Sexy or Not
+===========
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as 
-    published by the Free Software Foundation.
+Plugin for wordpress, where you can rating images from your media library, similar to sexy or not. 
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+**Description** 
 
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+The objective of this plugin is to show a random image from the media library on your installation, and allows rating the image, after this show another image. 
 
-    For more information please check [GNU General Public License, version 2](http://www.gnu.org/licenses/gpl-2.0.html)
+Also provides statics of the images. 
