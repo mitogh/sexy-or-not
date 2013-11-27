@@ -2,24 +2,70 @@
 
 class Sexy{
 
-    private $images = array(); 
+    // The attachment object
+    private $attachmentObject = null;
 
-    public function get_random_image_from_library(){
+    // The title of the attachment 
+    private $image_title = ''; 
+
+    // When the image was upload
+    private $image_date = ''; 
+
+    // url of the image
+    public $image_url = ''; 
+
+    // Height of the image
+    private $image_height = ''; 
+
+    // Width of the image
+    private $image_width = ''; 
+
+    // ID of the author of this image
+    private $author_id = 0; 
+
+    /**
+     * Get the data of the image
+     * @var     $size   String  The size of the image
+     */
+    public function fill_data_from_object( $size = 'thumbnail'){
+
+        if($this->attachmentObject !== null){   
+            // Post Object
+            $post = $this->attachmentObject; 
+            // Image data on array
+            $image = wp_get_attachment_image_src($post->ID, $size);
+
+            $this->image_date   = $post->post_date;
+            $this->author_id    = $post->post_author;
+            $this->image_title  = $post->post_title;            
+
+            if( count($image) ){
+                $this->image_url        = $image[0]; 
+                $this->image_height     = $image[1];
+                $this->image_width      = $image[2];
+            }
+        }
+    }
+
+    /**
+     * Generates a random attachment object from 
+     * the media library
+     */
+    public function random_image_from_library(){
 
         $args = array(
-            'post_type' => 'attachment',
             'numberposts' => 1,
+            'orderby'     => 'rand',
+            'post_type' => 'attachment',
+            'post_mime_type' =>'image',
             'post_status' => null,
             'post_parent' => null, 
-            'orderby'     => 'rand'
         ); 
         
         $attachments = get_posts($args);
 
         if ($attachments) {
-            foreach ($attachments as $post) {
-                the_attachment_link($post->ID, true);
-            }
+            $this->attachmentObject = $attachments[0]; 
         }
     }
 }

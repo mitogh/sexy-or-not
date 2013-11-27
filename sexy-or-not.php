@@ -11,5 +11,48 @@
 
 
 include_once(plugin_dir_path(__FILE__).'/Sexy.class.php');
-# $sexy = new Sexy();
-# $sexy->get_random_image_from_library();
+
+add_action('admin_menu', 'sexy_menu');
+
+function sexy_menu() {
+    add_menu_page(__('Sexy Options','Sexy or Not'), __('Sexy Options','menu-test'), 'manage_options', 'mt-top-level-handle', 'options' );
+}
+
+
+function options(){
+
+    if( !current_user_can('manage_options') ){
+        wp_die(__('You do not have sufficient permission to access this page'));
+    }
+
+    $sexy = new Sexy(); 
+    $sexy->random_image_from_library();
+    $sexy->fill_data_from_object('medium');
+?>
+    <div class="wrap">
+        <div id="icon-options-general" class="icon32"><br /></div><h2>Sexy Options</h2>
+
+        <div><img src='<?php echo $sexy->image_url; ?>'></div>
+
+        <form method="post" action="options.php">
+            <table class="form-table">
+                <tr valign="top">
+                    <th scope="row"><label for="minimum_rating">Minimum Rating</label></th>
+                    <td>
+                        <input name="minimum_rating" type="text" id="minimum_rating" value="1" class="regular-text" />
+                        <p class="description">The minimum rating for each image.</p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <th scope="row"><label for="maximum_rating">Maximum Rating</label></th>
+                    <td><input name="maximum_rating" type="text" id="maximum_rating" value="10" class="regular-text" />
+                    <p class="description">The maximum rating for each image.</p></td>
+                </tr>
+            </table>
+
+        <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes"  /></p>
+
+        </form>
+    </div>
+<?php
+}// Options
