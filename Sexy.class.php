@@ -7,6 +7,9 @@ class Sexy{
     // The attachment object
     private $attachmentObject = null;
 
+    // Size of the image
+    private $image_size = 'thumbnail'; 
+
     // The title of the attachment 
     private $image_title = ''; 
 
@@ -14,7 +17,7 @@ class Sexy{
     private $image_date = ''; 
 
     // url of the image
-    private $image_url = ''; 
+    private $image = ''; 
 
     // Height of the image
     private $image_height = ''; 
@@ -25,26 +28,36 @@ class Sexy{
     // ID of the author of this image
     private $author_id = 0; 
 
+    public function __construct( $size = 'thumbnail'){
+        $this->image_size = $size; 
+        $this->random_image_from_library(); 
+        $this->fill_data_from_object(); 
+    }
+
+    public function __destruct(){
+        unset($this);
+    }
+
     /**
      * Fill most of the variable of instance 
      * @var     $size   String  The size of the image
      */
-    public function fill_data_from_object( $size = 'thumbnail'){
+    public function fill_data_from_object(){
 
-        if($this->attachmentObject !== null){   
+        if( $this->attachmentObject !== null ){   
             // Post Object
             $post = $this->attachmentObject; 
             // Image data on array
-            $image = wp_get_attachment_image_src($post->ID, $size);
+            $image = wp_get_attachment_image_src( $post->ID, $this->image_size );
 
             $this->image_date   = $post->post_date;
             $this->author_id    = $post->post_author;
             $this->image_title  = $post->post_title;            
 
             if( count($image) ){
-                $this->image_url        = $image[0]; 
-                $this->image_height     = $image[1];
-                $this->image_width      = $image[2];
+                $this->image            = $image[0]; 
+                $this->image_width      = $image[1];
+                $this->image_height     = $image[2];
             }
         }
     }
@@ -56,18 +69,36 @@ class Sexy{
     public function random_image_from_library(){
 
         $args = array(
-            'numberposts' => 1,
-            'orderby'     => 'rand',
-            'post_type' => 'attachment',
-            'post_mime_type' =>'image',
-            'post_status' => null,
-            'post_parent' => null, 
+            'numberposts'       => 1,
+            'orderby'           => 'rand',
+            'post_type'         => 'attachment',
+            'post_mime_type'    =>'image',
+            'post_status'       => null,
+            'post_parent'       => null, 
         ); 
         
-        $attachments = get_posts($args);
+        $attachments = get_posts( $args );
 
-        if ($attachments) {
+        if( $attachments ){
             $this->attachmentObject = $attachments[0]; 
         }
     }
+
+    public function show_image(){
+        return "<img src='$this->image' width='$this->image_width' height='$this->image_height' alt='$this->image_title'/>";
+    }
+
+    public function show_buttons( $min = 0, $max = 10 ){
+
+        $form = '<form action="">'; 
+        for( $min; $min <= $max; $min++ ){
+            $form .= "<input type='radio' name='rating' value='$min'>$min<br>"; 
+        }
+
+        $form .= '</form>'; 
+
+        echo $form; 
+    }
+
+
 }
