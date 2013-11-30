@@ -28,21 +28,21 @@ class Sexy{
     // ID of the author of this image
     private $author_id = 0; 
 
-    public function __construct( $size = 'thumbnail'){
+    public function __construct( $size = 'thumbnail' ){
         $this->image_size = $size; 
         $this->random_image_from_library(); 
         $this->fill_data_from_object(); 
     }
 
     public function __destruct(){
-        unset($this);
+        unset( $this );
     }
 
     /**
      * Fill most of the variable of instance 
      * @var     $size   String  The size of the image
      */
-    public function fill_data_from_object(){
+    private function fill_data_from_object(){
 
         if( $this->attachmentObject !== null ){   
             // Post Object
@@ -54,7 +54,7 @@ class Sexy{
             $this->author_id    = $post->post_author;
             $this->image_title  = $post->post_title;            
 
-            if( count($image) ){
+            if( count( $image ) ){
                 $this->image            = $image[0]; 
                 $this->image_width      = $image[1];
                 $this->image_height     = $image[2];
@@ -64,9 +64,9 @@ class Sexy{
 
     /**
      * Generates a random attachment object from 
-     * the media library
+     * the media library, with the mime type of image.
      */
-    public function random_image_from_library(){
+    private function random_image_from_library(){
 
         $args = array(
             'numberposts'       => 1,
@@ -84,21 +84,14 @@ class Sexy{
         }
     }
 
-    public function show_image(){
+    /**
+     * Return a String with the image, adding the 
+     * width, height and alt for the image.
+     * 
+     * @return string hte html for the image
+     */
+    public function get_image(){
         return "<img src='$this->image' width='$this->image_width' height='$this->image_height' alt='$this->image_title'/>";
     }
-
-    public function show_buttons( $min = 0, $max = 10 ){
-
-        $form = '<form action="">'; 
-        for( $min; $min <= $max; $min++ ){
-            $form .= "<input type='radio' name='rating' value='$min'>$min<br>"; 
-        }
-
-        $form .= '</form>'; 
-
-        echo $form; 
-    }
-
 
 }
