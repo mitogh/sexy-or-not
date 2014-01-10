@@ -5,8 +5,7 @@
  */
 
 class Operations{
-
-
+    
     public function install_database(){
         global $wpdb; 
         $charset_collate = ''; 

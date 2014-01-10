@@ -9,15 +9,13 @@
  * License: GPL2
  */
 
-
-include_once(plugin_dir_path(__FILE__).'/Sexy.class.php');
+include_once(plugin_dir_path(__FILE__).'/class-sexy.php');
 
 add_action('admin_menu', 'sexy_menu');
 
 function sexy_menu() {
     add_menu_page(__('Sexy Options','Sexy or Not'), __('Sexy Options','menu-test'), 'manage_options', 'sexy-options', 'options' );
 }
-
 
 function options(){
 
