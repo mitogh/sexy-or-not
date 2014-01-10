@@ -26,26 +26,8 @@ function options(){
     <div class="wrap">
         <div id="icon-options-general" class="icon32"><br /></div><h2>Sexy Options</h2>
 
-        <form method="post" action="">
-            <table class="form-table">
-                <tr valign="top">
-                    <th scope="row"><label for="minimum_rating">Minimum Rating</label></th>
-                    <td>
-                        <input name="minimum_rating" type="text" id="minimum_rating" value="1" class="regular-text" />
-                        <p class="description">The minimum rating for each image.</p>
-                    </td>
-                </tr>
-                <tr valign="top">
-                    <th scope="row"><label for="maximum_rating">Maximum Rating</label></th>
-                    <td><input name="maximum_rating" type="text" id="maximum_rating" value="10" class="regular-text" />
-                    <p class="description">The maximum rating for each image.</p></td>
-                </tr>
-            </table>
-
+            <h2>Statics</h2>
             <?php
-                $sexy = new Sexy('large'); 
-                $sexy->show_buttons(); 
-                echo $sexy->show_image();
             ?>
 
         <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes"  /></p>
@@ -54,3 +36,14 @@ function options(){
     </div>
 <?php
 }// Options
+
+// [sexy size="large"]
+function sexy_short_code_function( $atts ) {
+    extract( shortcode_atts( array(
+        'size' => 'medium',
+    ), $atts ) );
+    
+    $sexy = new Sexy($size); 
+    return $sexy->get_image();
+}
+add_shortcode( 'sexy', 'sexy_short_code_function' );

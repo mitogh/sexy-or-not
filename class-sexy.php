@@ -28,19 +28,48 @@ class Sexy{
     // ID of the author of this image
     private $author_id = 0; 
 
+    /**
+     * Construct the object
+     *
+     * @param   $size   String  The size of the image
+     */
     public function __construct( $size = 'thumbnail' ){
-        $this->image_size = $size; 
+        // Set the default size of the image
+        $this->set_size($size);
+        // Take a random image from the library
         $this->random_image_from_library(); 
+        // Fill the object with the data
         $this->fill_data_from_object(); 
     }
 
+    /**
+     * Destruct the whole object
+     */
     public function __destruct(){
         unset( $this );
     }
 
     /**
+     * Ensure to use the 4 sizes of images
+     *
+     * @param $size     String  The size of the image
+     */
+    private function set_size($size = 'thumnail'){
+        switch($size){
+            case 'thumbnail':
+            case 'medium':
+            case 'large':
+            case 'full':
+                $this->image_size = $size;
+            break;
+
+            default: 
+                $this->image_size = 'medium';
+            break;
+        }
+    }    
+    /**
      * Fill most of the variable of instance 
-     * @var     $size   String  The size of the image
      */
     private function fill_data_from_object(){
 
