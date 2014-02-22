@@ -10,6 +10,7 @@
  */
 
 include_once(plugin_dir_path(__FILE__).'/class-sexy.php');
+include_once(plugin_dir_path(__FILE__).'/class-vote.php');
 
 add_action('admin_menu', 'sexy_menu');
 
@@ -39,11 +40,12 @@ function options(){
 
 // [sexy size="large"]
 function sexy_short_code_function( $atts ) {
-    extract( shortcode_atts( array(
-        'size' => 'medium',
-    ), $atts ) );
+    extract( shortcode_atts( array('size' => 'medium',), $atts ) );
     
     $sexy = new Sexy($size); 
+    $votes = new Vote();
+    $votes->set_message("Choose a ranking to see the next picture.");
+    $votes->generate_html();
     return $sexy->get_image();
 }
 add_shortcode( 'sexy', 'sexy_short_code_function' );

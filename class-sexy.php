@@ -120,7 +120,11 @@ class Sexy{
      * @return string hte html for the image
      */
     public function get_image(){
-        return "<img src='$this->image' width='$this->image_width' height='$this->image_height' alt='$this->image_title'/>";
+        if( $this->image ){
+            return "<img src='$this->image' width='$this->image_width' height='$this->image_height' alt='$this->image_title'/>";
+        }else{
+            return '';
+        }
     }
 
 }
