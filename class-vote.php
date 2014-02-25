@@ -33,6 +33,10 @@ class Vote{
             }
             echo '</div>';
             // Message space
+            echo "<div class='messages'>";
+                echo "<div class='low'>No</div>";
+                echo "<div class'hight'>Sexy</div>";
+            echo "</div>";
         echo '<div>';
         echo "</form>";
     }
