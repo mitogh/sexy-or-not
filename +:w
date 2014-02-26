@@ -28,10 +28,7 @@ class Vote{
                     echo "<div class='title_vote'>". $this->message . "</div>";
                     echo '<div class="votes">';
                         for($i = 1; $i <= $this->max; $i++){
-                            echo "<div class='vote'><input type='radio' name='rate' value='";
-                            echo $i;
-                            echo "'>";
-                            echo $i;
+                            echo "<div class='vote'><input type='radio' name='rate'>";
                             echo "</div>";
                         }
                     echo '</div>';
