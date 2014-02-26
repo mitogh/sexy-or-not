@@ -38,6 +38,12 @@ function options(){
 <?php
 }// Options
 
+function sexy_styles(){
+    wp_register_style("sexy-style", plugins_url("/css/style.css", __FILE__), array(), null, "all");
+    wp_enqueue_style("sexy-style");
+}
+add_action("wp_enqueue_scripts", "sexy_styles");
+
 // [sexy size="large"]
 function sexy_short_code_function( $atts ) {
     extract( shortcode_atts( array('size' => 'medium',), $atts ) );

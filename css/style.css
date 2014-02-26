@@ -1,0 +1,32 @@
+.votation{
+    background-color: #1289D0;
+    color: #DCE9F1;
+    border: 3px double #033B5C;
+    padding: 10px;
+    overflow: hidden;
+    font-weight: bold;
+}
+.title_vote{
+    text-align:center;
+}
+.votes{
+    overflow: hidden;
+}
+.vote{
+    float: left;
+    display: block;
+    margin-right: 5px;
+}
+.vote input{ 
+    margin-left: 5px;
+}
+
+.messages > .low {
+    float: left;
+    color: #0A5F91;
+}
+.messages > .hight{
+    float: right;
+    color: #90E916;
+}
+

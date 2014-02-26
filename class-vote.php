@@ -23,21 +23,21 @@ class Vote{
     public function generate_html(){
         // TODO: Generate better way to display the HTML rather than use
         // the typical echo
-        echo "<form method='post'>";
-        echo '<div class="votation">';
-            echo $this->message;
-            echo '<div class="votes">';
-            for($i = 1; $i <= $this->max; $i++){
-                echo '<span class="vote"><input type="radio" name="puntaje"';
-                echo "value=\"$i\">$i</span>";
-            }
-            echo '</div>';
-            // Message space
-            echo "<div class='messages'>";
-                echo "<div class='low'>No</div>";
-                echo "<div class'hight'>Sexy</div>";
-            echo "</div>";
-        echo '<div>';
-        echo "</form>";
+            echo "<form method='post'>";
+                echo '<div class="votation">';
+                    echo "<div class='title_vote'>". $this->message . "</div>";
+                    echo '<div class="votes">';
+                        for($i = 1; $i <= $this->max; $i++){
+                            echo "<div class='vote'><input type='radio'>1";
+                            echo "</div>";
+                        }
+                    echo '</div>';
+                    // Message space
+                    echo "<div class='messages'>";
+                        echo "<div class='low'>No</div>";
+                        echo "<div class='hight'>Sexy</div>";
+                    echo "</div>";
+                echo '</div>';
+            echo "</form>";
     }
 }
