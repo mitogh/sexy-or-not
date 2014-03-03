@@ -11,56 +11,29 @@
 
 include_once(plugin_dir_path(__FILE__).'/class-sexy.php');
 include_once(plugin_dir_path(__FILE__).'/class-vote.php');
+include_once(plugin_dir_path(__FILE__).'/config.php');
 
 add_action('admin_menu', 'sexy_menu');
 
 function sexy_menu() {
-    add_menu_page(__('Sexy Options','Sexy or Not'), __('Sexy Options','menu-test'), 'manage_options', 'sexy-options', 'options' );
+    add_menu_page(__('Sexy or Not','Sexy or Not'), __('Sexy or Not','statics'), 'manage_options', 'sexy-options', 'options' );
+    add_submenu_page("sexy-options", "Configuration", "Configuration", 0, "sexy-configuration", "configuration");
 }
 
 function options(){
-
     if( !current_user_can('manage_options') ){
         wp_die(__('You do not have sufficient permission to access this page'));
     }
 ?>
     <div class="wrap">
-        <div id="icon-options-general" class="icon32"><br /></div><h2>Sexy Options</h2>
+        <div id="icon-options-general" class="icon32"><br /></div><h2>Sexy or Not</h2>
 
-            <h2>Statics</h2>
-            <?php
-            ?>
-
-        <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes"  /></p>
-
+        <h2>Statics</h2>
+        <h3>Top rated</h3>
         </form>
     </div>
 <?php
 }// Options
 
-// Add the script.js file to the stack of loading files
-add_action("wp_enqueue_scripts", "sexy_scripts");
-function sexy_scripts(){
-    wp_enqueue_script("jquery");
-    wp_register_script("sexy-script", plugins_url("/js/script.js", __FILE__), array(), null);
-    wp_enqueue_script("sexy-script");
+function configuration(){
 }
-
-// Add the file style.css as the base styles
-function sexy_styles(){
-    wp_register_style("sexy-style", plugins_url("/css/style.css", __FILE__), array(), null, "all");
-    wp_enqueue_style("sexy-style");
-}
-add_action("wp_enqueue_scripts", "sexy_styles");
-
-// [sexy size="large"]
-function sexy_short_code_function( $atts ) {
-    extract( shortcode_atts( array('size' => 'medium',), $atts ) );
-    
-    $sexy = new Sexy($size); 
-    $votes = new Vote();
-    $votes->set_message("Choose a ranking to see the next picture.");
-    $votes->generate_html();
-    return $sexy->get_image();
-}
-add_shortcode( 'sexy', 'sexy_short_code_function' );
