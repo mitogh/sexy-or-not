@@ -23,7 +23,7 @@ class Vote{
     public function generate_html(){
         // TODO: Generate better way to display the HTML rather than use
         // the typical echo
-            echo "<form method='post'>";
+            echo "<form method='post' id='sexy-or-not'>";
                 echo '<div class="votation">';
                     echo "<div class='title_vote'>". $this->message . "</div>";
                     echo '<div class="votes">';

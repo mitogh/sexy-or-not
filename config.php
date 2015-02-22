@@ -1,6 +1,6 @@
 <?php
 /**
- * Configuration file, this file set the default files to use 
+ * Configuration file, this file set the default files to use
  * in the site, files like: *.js, *.ccc and so on.
  */
 // Add the script.js file to the stack of loading files
@@ -31,8 +31,8 @@ add_action("wp_enqueue_scripts", "sexy_styles");
  */
 function sexy_short_code_function( $atts ) {
     extract( shortcode_atts( array('size' => 'medium',), $atts ) );
-    
-    $sexy = new Sexy($size); 
+
+    $sexy = new Sexy($size);
     $votes = new Vote();
     $votes->set_message("Choose a ranking to see the next picture.");
     $votes->generate_html();
